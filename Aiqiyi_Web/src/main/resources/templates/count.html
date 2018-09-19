@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <!-- 引入 ECharts 文件 -->
+        <script src="js/echarts.min.js"></script>
+        <script src="js/jquery.js"></script>
+        <title>Title</title>
+    </head>
+    <body>
+        <div id="main" style="width: 600px;height:400px; position: absolute;top:50%;left:50%;margin-top:-200px;margin-left: -300px"></div>
+        <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+        <script type="text/javascript">
+
+            // 基于准备好的 dom，初始化 echarts 实例
+            var myChart = echarts.init(document.getElementById('main'));
+
+            // 指定图表的配置项和数据
+            option = {
+
+                backgroundColor: '#2c343c',
+
+                title: {
+                    text: '爱奇艺官方访问统计',
+                    left: 'center',
+                    top: 20,
+                    textStyle: {
+                        color: '#ccc'
+                    }
+                },
+
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+
+                visualMap: {
+                    show: false,
+                    min: 80,
+                    max: 800,
+                    inRange: {
+                        colorLightness: [0, 1]
+                    }
+                },
+
+                series: [
+                    {
+                        name: '访问来源',
+                        type: 'pie',
+                        radius: '55%',
+                        center: ['50%', '50%'],
+
+                        data: (function () {
+                            var datas = [];
+                            $.ajax({
+                                type: "POST",
+                                url: "/typelist",
+                                dataType: 'json',
+                                async: false,
+                                success: function (result) {
+                                    for (var i = 0; i < result.length; i++) {
+                                        datas.push({"value": result[i].value, "name":result[i].name})
+                                    }
+                                }
+                            })
+                            return datas;
+                        })()
+                        .sort(function (a, b) {
+                            return a.value - b.value;
+                        }),
+
+                        roseType: 'radius',
+
+                        label: {
+                            normal: {
+                                textStyle: {
+                                    color: 'rgba(0, 200, 100, 0.6)'
+                                }
+                            }
+                        },
+
+                        labelLine: {
+                            normal: {
+                                lineStyle: {
+                                  color: 'rgba(200, 50, 255, 0.3)'
+                                },
+                                smooth: 0.2,
+                                length: 10,
+                                length2: 20
+                            }
+                        },
+
+                        itemStyle: {
+                            normal: {
+                                label: {
+                                    show: true,
+                                    formatter: '{b} : {c} ({d}%)'
+                                },
+                                labelLine: {show: true}
+                            }
+                        },
+
+                        animationType: 'scale',
+                        animationEasing: 'elasticOut',
+                        animationDelay: function (idx) {
+                            return Math.random() * 200;
+                        }
+                    }
+                ]
+            };
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+
+        </script>
+
+    </body>
+</html>
