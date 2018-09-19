@@ -1,0 +1,1 @@
+python /home/hadoop/aiqiyi_logs/generate.py
