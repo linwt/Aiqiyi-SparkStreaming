@@ -137,7 +137,7 @@ hbase(main):007:0> scan 'search'
 - 打包并上传jar包
 > Maven Projects -> Lifecycle -> package
 - 运行作业
-> [hadoop@mini1 ~]$java –jar aiqiyiweb-0.0.1-SNAPSHOT.jar
+> [hadoop@mini1 ~]$ java –jar aiqiyiweb-0.0.1-SNAPSHOT.jar
 - 浏览器访问
 > mini1:8080/count
 
