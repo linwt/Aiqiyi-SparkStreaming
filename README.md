@@ -77,20 +77,19 @@ hbase(main):001:1> create ‘search,’info’
 
 ### 8. 查看hbase表情况
 > hbase(main):007:2> scan 'type' \
-hbase(main):007:0> scan 'search'
+hbase(main):007:3> scan 'search'
 
 ## 六、Spark on YARN
-### 1. 打包
+### 1. 打包并上传jar包
 > - File → Project Structure → Artifacts → “+” → JAR → From modules with dependencies → Main Class:StreamingApp → OK
 > - Build → Build Artifacts → Build
-### 2. 上传jar包
-### 3. 提交作业
+### 2. 提交作业
 > [hadoop@mini1 spark]$ bin/spark-submit \
 --master yarn \
 --class main.StreamingApp \
 /home/hadoop/aiqiyi_logs/Aiqiyi_SparkStreaming.jar
-### 4. 执行python脚本
-### 5. 查看hbase表情况
+### 3. 执行python脚本
+### 4. 查看hbase表情况
 
 ## 七、其他情况
 ### 1. 查看进程
@@ -121,8 +120,12 @@ hbase(main):007:0> scan 'search'
 2184 Kafka \
 2588 NodeManager \
 1647 QuorumPeerMain 
+
 ### 2. hbase表结果
 ![](https://github.com/linwt/AiqiyiSparkStreamingProject/blob/master/Aiqiyi_Picture/hbase.png)
+
+### 3. 相关文件
+![](https://github.com/linwt/AiqiyiSparkStreamingProject/blob/master/Aiqiyi_Picture/aiqiyi_logs.png)
 
 ## 八、可视化展示
 ### 1. 项目运行在本地
@@ -137,7 +140,7 @@ hbase(main):007:0> scan 'search'
 - 打包并上传jar包
 > Maven Projects -> Lifecycle -> package
 - 运行作业
-> [hadoop@mini1 ~]$ java –jar aiqiyiweb-0.0.1-SNAPSHOT.jar
+> [hadoop@mini1 aiqiyi_logs]$ java –jar aiqiyiweb-0.0.1-SNAPSHOT.jar
 - 浏览器访问
 > mini1:8080/count
 
