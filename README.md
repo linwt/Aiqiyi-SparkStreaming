@@ -66,8 +66,8 @@ SparkStreaming爱奇艺实时流统计项目——实战笔记
 - 启动hbase shell
 > [hadoop@mini1 hbase]$ bin/hbase shell
 - 创建hbase表
-> hbase(main):001:0> create ‘type’,’info’ \
-hbase(main):001:1> create ‘search,’info’
+> hbase(main):001:0> create 'type','info' \
+hbase(main):001:1> create 'search','info'
 
 ### 6. 运行程序
 > 运行StreamingApp程序，准备接收、处理、保存数据
